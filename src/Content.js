@@ -1,54 +1,21 @@
 import { useEffect, useState } from "react";
 
-const tabs = ["posts", "comments", "albums"];
-
 function Content() {
-  const [posts, setPosts] = useState([]);
-  const [type, setType] = useState("posts");
-  const [showGoToTop, SetShowGoToTop] = useState(false);
+  const [avatar, setAvatar] = useState();
 
-  useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/${type}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-      });
-  }, [type]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      SetShowGoToTop(window.scrollY >= 200);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return window.removeEventListener("scroll", handleScroll);
-  });
+  const handlePreview = (e) => {
+    const file = e.target.files[0];
+    file.preview = URL.createObjectURL(file);
+    setAvatar(file);
+    if (avatar) {
+      URL.revokeObjectURL(avatar.preview);
+    }
+  };
 
   return (
     <div>
-      {tabs.map((tab) => (
-        <button
-          key={tab}
-          onClick={() => {
-            setType(tab);
-          }}
-          style={
-            type === tab ? { color: "white", backgroundColor: "brown" } : {}
-          }
-        >
-          {tab}
-        </button>
-      ))}
-
-      {posts.map((post) => (
-        <li key={post.id}>{post.title || post.name}</li>
-      ))}
-
-      {showGoToTop && (
-        <button style={{ position: "fixed", right: 20, bottom: 20 }}>
-          Go to top
-        </button>
-      )}
+      <input type="file" onChange={handlePreview} />
+      <img src={avatar.preview} style={{ width: "80%" }} alt="" />
     </div>
   );
 }
