@@ -1,25 +1,53 @@
 import { useCallback, useMemo, useReducer, useRef, useState } from "react";
 import Content from "./Content";
-const initState = 0;
-const UP_ACTION = "up";
-const DOWN_ACTION = "down";
-const reducer = (state, action) => {
-  switch (action) {
-    case UP_ACTION:
-      return state + 1;
-    case DOWN_ACTION:
-      return state - 1;
-    default:
-      throw new Error("invalid action");
-  }
-};
+
 function App() {
-  const [count, dispatch] = useReducer(reducer, initState);
+  const [todos, setTodos] = useState([]);
+  const [todo, setTodo] = useState("");
+
+  const inputRef = useRef();
+  const handleAdd = () => {
+    setTodos([...todos, todo]);
+    setTodo("");
+    inputRef.current.focus();
+  };
+
+  const removeTodo = (idx) => {
+    setTodos(() => {
+      const tempTodos = [...todos];
+      tempTodos.splice(idx, 1);
+      return tempTodos;
+    });
+  };
+  console.log(todos);
   return (
     <div style={{ padding: "10px 32px" }}>
-      <h1>{count}</h1>
-      <button onClick={() => dispatch(UP_ACTION)}>Up</button>
-      <button onClick={() => dispatch(DOWN_ACTION)}>Down</button>
+      <h3>Todo</h3>
+      <input
+        ref={inputRef}
+        type="text"
+        placeholder="Enter todo..."
+        value={todo}
+        onChange={(e) => {
+          setTodo(e.target.value);
+        }}
+        //&times;
+      />
+      <button onClick={handleAdd}>Add</button>
+      <ul>
+        {todos.map((todo, idx) => (
+          <li key={idx}>
+            {todo}{" "}
+            <span
+              onClick={() => {
+                removeTodo(idx);
+              }}
+            >
+              &times;
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
