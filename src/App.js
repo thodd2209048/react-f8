@@ -1,12 +1,12 @@
 import React from 'react';
 
 import '../src/App.css';
-import ThemeProvider from './courses/UseContext/ThemeProvider';
+import UseImperativeApp from './courses/UseImperative/UseImperativeApp';
 
 App.propTypes = {};
 
 function App(props) {
-  return <ThemeProvider />;
+  return <UseImperativeApp />;
 }
 
 export default App;
