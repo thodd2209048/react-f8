@@ -1,12 +1,12 @@
 import React from 'react';
 
 import '../src/App.css';
-import UseImperativeApp from './courses/UseImperative/UseImperativeApp';
+import ClsxApp from './courses/Clsx/ClsxApp';
 
 App.propTypes = {};
 
 function App(props) {
-  return <UseImperativeApp />;
+  return <ClsxApp />;
 }
 
 export default App;
