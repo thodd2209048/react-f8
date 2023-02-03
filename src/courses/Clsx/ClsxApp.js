@@ -9,6 +9,7 @@ function ClsxApp(props) {
   return (
     <div>
       <Button primary/>
+      <Button primary disable/>
     </div>
   );
 }

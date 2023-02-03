@@ -2,9 +2,15 @@
   padding: 4px 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .primary {
   color: #fff;
   background-color: #007bff;
+}
+
+.disable {
+  opacity: 0.5;
+  pointer-events: none;
 }

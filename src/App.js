@@ -1,12 +1,12 @@
 import React from 'react';
 
 import '../src/App.css';
-import ClsxApp from './courses/Clsx/ClsxApp';
+import RouterV6Index from './courses/RouterV6/RouterV6Index';
 
 App.propTypes = {};
 
 function App(props) {
-  return <ClsxApp />;
+  return <RouterV6Index />;
 }
 
 export default App;
